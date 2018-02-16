@@ -55,15 +55,17 @@ let handleWeatherResponse = function(response) {
     let forecast = weatherData[i];
     weatherIcon = icon(forecast.icon);
     weatherDescription = forecast.summary;
+    highTemp = Math.round(forecast.apparentTemperatureHigh);
+    lowTemp = Math.round(forecast.apparentTemperatureLow);
     let html = '<div class="col">';
     html = html + '<h3>' + weatherIcon + '</h3>';
-    html = html + '<h4>' + Math.round(forecast.apparentTemperatureHigh) + ' | '  + Math.round(forecast.apparentTemperatureLow) + '</h4>';
+    html = html + '<h4>' + highTemp + ' | '  + lowTemp + '</h4>';
     html = html + '<h5>' + weatherDescription + '</h5>';
     html = html + '</div>'
     $(".forecast").append(html);
   }
   $("#current-conditions-icon").append(currentIcon);
-  //$("#location").append();
+  //No location update needed because updated in line 6 of geocodeAndGetWeather function.
   $("#current-conditions-text").append(currentCondidtions);
   $(".current").fadeIn(1000);
   $(".forecast").fadeIn(5000);
