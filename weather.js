@@ -48,8 +48,9 @@ let handleWeatherResponse = function(response) {
   $("#current-conditions-text").empty();
   $(".forecast").empty();
   let weatherData = response.daily.data;
-  let currentStatus = weatherData[0];
+  let currentStatus = response.currently;
   currentIcon = icon(currentStatus.icon);
+  currentTemp = Math.round(currentStatus.temperature)+ '° <br>';
   currentCondidtions = currentStatus.summary;
   for (var i = 0; i < 6; i++) {
     let forecast = weatherData[i];
@@ -66,6 +67,7 @@ let handleWeatherResponse = function(response) {
   }
   $("#current-conditions-icon").append(currentIcon);
   //No location update needed because updated in line 6 of geocodeAndGetWeather function.
+  $("#current-conditions-text").append(currentTemp);
   $("#current-conditions-text").append(currentCondidtions);
   $(".current").fadeIn(1000);
   $(".forecast").fadeIn(5000);
