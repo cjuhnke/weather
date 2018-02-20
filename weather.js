@@ -40,18 +40,18 @@ let handleWeatherResponse = function(response) {
   // leave these two lines alone; they allow for the inspection of
   // the response object in the browser console (try typing "response"
   // in the Chrome JavaScript console!)
-  console.log(response)
-  window.response = response
+  console.log(response);
+  window.response = response;
 
   // **** your code starts here - don't modify anything else. you will be sad.
   $("#current-conditions-icon").empty();
   $("#current-conditions-text").empty();
   $(".forecast").empty();
-  let weatherData = response.daily.data;
   let currentStatus = response.currently;
-  currentIcon = icon(currentStatus.icon);
-  currentTemp = Math.round(currentStatus.temperature)+ '° <br>';
-  currentCondidtions = currentStatus.summary;
+  let currentIcon = icon(currentStatus.icon);
+  let currentTemp = Math.round(currentStatus.temperature)+ '° <br>';
+  let currentCondidtions = currentStatus.summary;
+  let weatherData = response.daily.data;
   for (var i = 0; i < 6; i++) {
     let forecast = weatherData[i];
     weatherIcon = icon(forecast.icon);
@@ -60,9 +60,9 @@ let handleWeatherResponse = function(response) {
     lowTemp = Math.round(forecast.apparentTemperatureLow);
     let html = '<div class="col">';
     html = html + '<h3>' + weatherIcon + '</h3>';
-    html = html + '<h4>' + highTemp + ' | '  + lowTemp + '</h4>';
+    html = html + '<h4>H: ' + highTemp + '° | L: '  + lowTemp + '°</h4>';
     html = html + '<h5>' + weatherDescription + '</h5>';
-    html = html + '</div>'
+    html = html + '</div>';
     $(".forecast").append(html);
   }
   $("#current-conditions-icon").append(currentIcon);
